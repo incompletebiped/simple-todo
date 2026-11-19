@@ -6,10 +6,10 @@ A to-do list in [Orca](https://www.onorca.dev)'s right sidebar: Markdown to-dos 
 
 ## Install
 
-In Orca, open Settings → Plugins and search for `simple-todo`, or run:
+In Orca, open Settings → Plugins and search for `simple-todo-vault`, or run:
 
 ```sh
-orca plugin install csavur/simple-todo
+orca plugin install incompletebiped/simple-todo
 ```
 
 Orca lists the access the plugin asks for (see [Access](#access)) and installs it once you approve.
@@ -41,25 +41,25 @@ The to-do shows in the panel within a few seconds, marked "from an agent". You c
 
 ### The skill
 
-Agents learn how from the `simple-todo` skill, [skills/simple-todo/SKILL.md](skills/simple-todo/SKILL.md). There are two ways to install it; use either.
+Agents learn how from the `simple-todo-vault` skill, [skills/simple-todo-vault/SKILL.md](skills/simple-todo-vault/SKILL.md). There are two ways to install it; use either.
 
-**With the plugin (nothing to do).** "Let agents add to-dos", under the plugin in Orca's Settings, is on by default. While it is on, the plugin keeps the skill in `~/.agents/skills/simple-todo`, where opencode, pi and other agents that read the shared skills folder find it, and links it into `~/.claude/skills` for Claude Code. It updates the skill when the plugin updates and removes it when you turn the setting off.
+**With the plugin (nothing to do).** "Let agents add to-dos", under the plugin in Orca's Settings, is on by default. While it is on, the plugin keeps the skill in `~/.agents/skills/simple-todo-vault`, where opencode, pi and other agents that read the shared skills folder find it, and links it into `~/.claude/skills` for Claude Code. It updates the skill when the plugin updates and removes it when you turn the setting off.
 
 **Yourself.** If you keep your agents' skills in your own setup, turn the setting off and install the skill with the [skills CLI](https://github.com/vercel-labs/skills):
 
 ```sh
-npx skills add csavur/simple-todo
+npx skills add incompletebiped/simple-todo
 ```
 
-or copy `skills/simple-todo` from this repository into your agent's skills folder (your dotfiles, `~/.claude/skills`, a project's `.claude/skills`).
+or copy `skills/simple-todo-vault` from this repository into your agent's skills folder (your dotfiles, `~/.claude/skills`, a project's `.claude/skills`).
 
 Either way, start a new agent session afterwards: agents read their skills when a session starts.
 
-The two ways do not fight. The plugin only touches a copy it wrote and nobody changed since: a `simple-todo` skill you installed or edited is left alone, and so is a skills folder it cannot write to. `orca plugin logs` says when that happens.
+The two ways do not fight. The plugin only touches a copy it wrote and nobody changed since: a `simple-todo-vault` skill you installed or edited is left alone, and so is a skills folder it cannot write to. `orca plugin logs` says when that happens.
 
 ### How it works
 
-The skill tells the agent to append a line such as `- [ ] Fix the login redirect !high @web #bug due:tomorrow` to `~/.simple-todo/inbox.md`. The plugin takes the lines in, into the list being shown. Lines appended while Orca is closed wait for it. Any tool that can append to that file can add to-dos the same way; "Copy instructions for agents" in the list menu gives the format as text.
+The skill tells the agent to append a line such as `- [ ] Fix the login redirect !high @web #bug due:tomorrow` to `~/.simple-todo-vault/inbox.md`. The plugin takes the lines in, into the list being shown. Lines appended while Orca is closed wait for it. Any tool that can append to that file can add to-dos the same way; "Copy instructions for agents" in the list menu gives the format as text.
 
 The inbox is on the machine the agent runs on, so this reaches agents on this machine, not those on a paired Orca server or an SSH host.
 
@@ -80,7 +80,7 @@ The plugin runs a worker (`trusted-worker`), which Orca keeps running to update 
 
 Projects on a paired Orca server belong to another Orca runtime, which the plugin API does not reach. For those the worker runs the `orca` CLI that ships with the app (`environment list`, `repo list`, `worktree list`, `worktree ps`, `terminal list`, `terminal send`, `worktree activate`, `agent launch` and `plugin open`). The CLI acts with your own access, outside the capability list above.
 
-The worker also touches three places in your home folder, outside the capability list too: it reads `~/.simple-todo/inbox.md`, and, while "Let agents add to-dos" is on, writes `~/.agents/skills/simple-todo` and a link to it in `~/.claude/skills`.
+The worker also touches three places in your home folder, outside the capability list too: it reads `~/.simple-todo-vault/inbox.md`, and, while "Let agents add to-dos" is on, writes `~/.agents/skills/simple-todo-vault` and a link to it in `~/.claude/skills`.
 
 ## Develop
 

@@ -1,7 +1,7 @@
 {
   "manifestVersion": 2,
-  "id": "simple-todo",
-  "name": "Simple Todo",
+  "id": "simple-todo-vault",
+  "name": "Simple Todo Vault",
   "version": "0.1.0",
   "description": "A to-do list in the sidebar: Markdown to-dos with priorities, due days, tags and lists, tagged with your Orca projects, that you can hand to an agent and follow. Open to-dos show in the status bar.",
   "license": "MIT",
@@ -9,12 +9,12 @@
     "name": "Celal Savur",
     "url": "https://github.com/csavur"
   },
-  "repository": "https://github.com/csavur/simple-todo",
-  "homepage": "https://github.com/csavur/simple-todo",
+  "repository": "https://github.com/incompletebiped/simple-todo",
+  "homepage": "https://github.com/incompletebiped/simple-todo",
   "icon": "assets/icon.png",
   "cover": {
     "path": "assets/cover.png",
-    "alt": "The Simple Todo panel in Orca: to-do cards with priorities, due days, tags and an agent at work on one of them."
+    "alt": "The Simple Todo Vault panel in Orca: to-do cards with priorities, due days, tags and an agent at work on one of them."
   },
   "engines": {
     "orca": ">=1.4.248"
@@ -25,25 +25,25 @@
   "contributes": {
     "panels": [
       {
-        "id": "simple-todo",
-        "title": "Simple Todo",
+        "id": "simple-todo-vault",
+        "title": "Simple Todo Vault",
         "icon": "check",
         "entry": "panel/index.html"
       }
     ],
     "commands": [
       {
-        "id": "simple-todo.summary",
-        "title": "Simple Todo: Show Open Tasks"
+        "id": "simple-todo-vault.summary",
+        "title": "Simple Todo Vault: Show Open Tasks"
       },
       {
-        "id": "simple-todo.quickAdd",
-        "title": "Simple Todo: New To-do"
+        "id": "simple-todo-vault.quickAdd",
+        "title": "Simple Todo Vault: New To-do"
       }
     ],
     "keybindings": [
       {
-        "command": "simple-todo.quickAdd",
+        "command": "simple-todo-vault.quickAdd",
         "key": "Mod+Alt+Slash"
       }
     ],
@@ -52,7 +52,7 @@
         "id": "open",
         "icon": "check",
         "tooltip": "Open to-dos",
-        "command": "simple-todo.summary"
+        "command": "simple-todo-vault.summary"
       }
     ],
     "settings": [
@@ -75,7 +75,7 @@
       {
         "key": "agentSkill",
         "title": "Let agents add to-dos",
-        "description": "Keeps a simple-todo skill in ~/.agents/skills, linked into ~/.claude/skills, that tells coding agents how to add a to-do. Turning it off removes the skill. A skill of that name you installed or changed yourself is left alone.",
+        "description": "Keeps a simple-todo-vault skill in ~/.agents/skills, linked into ~/.claude/skills, that tells coding agents how to add a to-do. Turning it off removes the skill. A skill of that name you installed or changed yourself is left alone.",
         "type": "boolean",
         "default": true
       },

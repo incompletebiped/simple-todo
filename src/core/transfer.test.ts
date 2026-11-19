@@ -76,5 +76,5 @@ test('a checklist is imported into the list being shown', () => {
 })
 
 test('the agent instructions name the inbox file', () => {
-  assert.ok(inboxInstructions('/home/me/.simple-todo/inbox.md').includes('/home/me/.simple-todo/inbox.md'))
+  assert.ok(inboxInstructions('/home/me/.simple-todo-vault/inbox.md').includes('/home/me/.simple-todo-vault/inbox.md'))
 })

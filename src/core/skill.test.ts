@@ -10,7 +10,7 @@ test('the skill file in the repository is the text the worker installs', async (
 
 test('the skill names itself, the inbox and a line the inbox reads', () => {
   const text = skillText()
-  assert.match(text, /^---\nname: simple-todo\ndescription: .+\n---\n/)
+  assert.match(text, /^---\nname: simple-todo-vault\ndescription: .+\n---\n/)
   assert.ok(text.includes(SKILL_INBOX))
   const example = /^- \[ \] .*due:.*$/m.exec(text)?.[0] ?? ''
   assert.deepEqual(parseChecklist(example, '2026-01-01'), [

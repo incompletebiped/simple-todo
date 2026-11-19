@@ -793,7 +793,7 @@ function onAct(act: string, target: HTMLElement): void {
         exportMarkdown(state.todos, currentList(state.prefs))
       )
     case 'export-json':
-      return saveFile('simple-todo-backup.json', 'application/json', exportJson(state.todos, state.prefs.lists, Date.now()))
+      return saveFile('simple-todo-vault-backup.json', 'application/json', exportJson(state.todos, state.prefs.lists, Date.now()))
     case 'import':
       state.popover = null
       render(['header'])

@@ -57,7 +57,7 @@ const cli: OrcaCli = async (args) => {
 /** A stand-in for the inbox file on disk. */
 function fakeInbox(text = ''): InboxFile & { text: string } {
   return {
-    path: '/home/me/.simple-todo/inbox.md',
+    path: '/home/me/.simple-todo-vault/inbox.md',
     text,
     async take() {
       const taken = this.text
@@ -135,7 +135,7 @@ test('shows open tasks in the status bar and follows the stored list', async () 
 
 test('the command summarises open tasks', async () => {
   const worker = await mountWorker(main, { host: mockHost({ storage: { todos } }) })
-  assert.equal(await worker.command('simple-todo.summary'), '- [Urgent] Write docs')
+  assert.equal(await worker.command('simple-todo-vault.summary'), '- [Urgent] Write docs')
   await worker.deactivate()
 })
 
@@ -349,15 +349,15 @@ test('the quick-add command opens the panel and tells it to show the form', asyn
   const listing: OrcaCli = async (args) => {
     cliCalls.push([...args])
     return args[1] === 'list'
-      ? { plugins: [{ pluginKey: 'someone.simple-todo' }, { pluginKey: 'local.simple-todo', isDev: true }, { pluginKey: 'x.other' }] }
+      ? { plugins: [{ pluginKey: 'someone.simple-todo-vault' }, { pluginKey: 'local.simple-todo-vault', isDev: true }, { pluginKey: 'x.other' }] }
       : {}
   }
   const worker = await mountWorker(createWorker(listing, quiet), { host: mockHost() })
   assert.deepEqual(await worker.request('compose.take'), { pending: false })
-  assert.equal(await worker.command('simple-todo.quickAdd'), '')
+  assert.equal(await worker.command('simple-todo-vault.quickAdd'), '')
   assert.deepEqual(worker.posts, [{ event: 'compose', payload: {} }])
   // The development copy is the one running.
-  assert.deepEqual(cliCalls.at(-1), ['plugin', 'open', 'local.simple-todo', '--panel=simple-todo'])
+  assert.deepEqual(cliCalls.at(-1), ['plugin', 'open', 'local.simple-todo-vault', '--panel=simple-todo-vault'])
   // A panel that was not open yet learns of it as it loads, once.
   assert.deepEqual(await worker.request('compose.take'), { pending: true })
   assert.deepEqual(await worker.request('compose.take'), { pending: false })
@@ -369,7 +369,7 @@ test('takes to-dos from the inbox file into the list being shown, and empties it
   const host = mockHost({ storage: { todos, prefs: { list: 'work', lists: [{ id: 'work', title: 'Work' }] } } })
   const handle = createWorker(cli, { inbox, timers: false })
   const worker = await mountWorker(handle, { host })
-  assert.deepEqual(await worker.request('inbox.path'), { path: '/home/me/.simple-todo/inbox.md' })
+  assert.deepEqual(await worker.request('inbox.path'), { path: '/home/me/.simple-todo-vault/inbox.md' })
   await handle.look()
   const stored = host.data().storage.todos as unknown as { text: string; list?: string; origin?: string; priority?: string; tags?: string[] }[]
   assert.equal(stored.length, 4)
@@ -389,8 +389,8 @@ test('takes to-dos from the inbox file into the list being shown, and empties it
 })
 
 test('keeps the agent skill installed while the setting is on, and removes it when turned off', async () => {
-  const home = await mkdtemp(join(tmpdir(), 'simple-todo-'))
-  const file = join(home, '.agents', 'skills', 'simple-todo', 'SKILL.md')
+  const home = await mkdtemp(join(tmpdir(), 'simple-todo-vault-'))
+  const file = join(home, '.agents', 'skills', 'simple-todo-vault', 'SKILL.md')
   let agentSkill = true
   const host = mockHost({ storage: { todos }, results: { 'settings.get': () => ({ settings: { agentSkill } }) } })
   const handle = createWorker(cli, { inbox: fakeInbox(), timers: false, skillHome: home })

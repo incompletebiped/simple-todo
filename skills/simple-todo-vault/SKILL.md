@@ -1,16 +1,16 @@
 ---
-name: simple-todo
-description: Add a to-do to the user's Simple Todo list in Orca. Use when the user asks to add, note or remember a to-do or task for later, or when you finish and leave follow-up work undone that the user should not lose.
+name: simple-todo-vault
+description: Add a to-do to the user's Simple Todo Vault list in Orca. Use when the user asks to add, note or remember a to-do or task for later, or when you finish and leave follow-up work undone that the user should not lose.
 ---
 
-# Simple Todo
+# Simple Todo Vault
 
-Simple Todo is the user's to-do list in Orca's sidebar. You add to it by appending lines to a
+Simple Todo Vault is the user's to-do list in Orca's sidebar. You add to it by appending lines to a
 file. Orca takes them in within a few seconds, or when it next starts, and empties the file.
 
 ## Add a to-do
 
-Append one line per to-do to `~/.simple-todo/inbox.md`. Create the folder and the file if they are
+Append one line per to-do to `~/.simple-todo-vault/inbox.md`. Create the folder and the file if they are
 missing. Each line is a Markdown list item:
 
 ```
@@ -20,8 +20,8 @@ missing. Each line is a Markdown list item:
 From a shell:
 
 ```sh
-mkdir -p ~/.simple-todo
-cat >> ~/.simple-todo/inbox.md <<'TODO'
+mkdir -p ~/.simple-todo-vault
+cat >> ~/.simple-todo-vault/inbox.md <<'TODO'
 - [ ] Text of the to-do !high @project-name #tag
 TODO
 ```

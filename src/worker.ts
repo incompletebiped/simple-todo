@@ -27,7 +27,7 @@ import { listRemoteProjects, mergeProjects } from './worker/remote.ts'
 import { syncSkill } from './worker/skill.ts'
 
 const STATUS_BAR_ITEM = 'open'
-const PANEL_ID = 'simple-todo'
+const PANEL_ID = 'simple-todo-vault'
 const REMINDED_KEY = 'reminded'
 /** The text of the agent skill the worker installed, while that copy is still its own. */
 const SKILL_KEY = 'skill'
@@ -162,7 +162,7 @@ function start(
   })
   void refreshStatusBar()
 
-  orca.commands.register('simple-todo.summary', async () => summaryOf(await loadTodos()))
+  orca.commands.register('simple-todo-vault.summary', async () => summaryOf(await loadTodos()))
 
   async function settings(): Promise<Settings> {
     try {
@@ -211,19 +211,19 @@ function start(
     return pluginKey
   }
 
-  orca.commands.register('simple-todo.quickAdd', async () => {
+  orca.commands.register('simple-todo-vault.quickAdd', async () => {
     composePending = true
     // An open panel hears this at once; one that has to open first asks with `compose.take`.
     orca.panels.post('compose', {})
     try {
       const key = await findPluginKey()
       if (!key) {
-        return 'Open the Simple Todo panel to add a to-do.'
+        return 'Open the Simple Todo Vault panel to add a to-do.'
       }
       await cli(['plugin', 'open', key, `--panel=${PANEL_ID}`])
       return ''
     } catch (error) {
-      return `Could not open the Simple Todo panel: ${messageOf(error)}`
+      return `Could not open the Simple Todo Vault panel: ${messageOf(error)}`
     }
   })
 

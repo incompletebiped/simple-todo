@@ -1,22 +1,22 @@
 // The agent skill that tells a coding agent how to add a to-do. The same text reaches agents two
-// ways: `skills/simple-todo/SKILL.md` in this repository, for people who manage their agents'
+// ways: `skills/simple-todo-vault/SKILL.md` in this repository, for people who manage their agents'
 // skills themselves, and the copy the worker installs (src/worker/skill.ts). A test keeps the
 // file in step with this function.
 
-export const SKILL_NAME = 'simple-todo'
+export const SKILL_NAME = 'simple-todo-vault'
 
 /** The inbox as a skill names it: the same file for everyone, whatever their home folder is. */
-export const SKILL_INBOX = '~/.simple-todo/inbox.md'
+export const SKILL_INBOX = '~/.simple-todo-vault/inbox.md'
 
 export function skillText(): string {
   return `---
 name: ${SKILL_NAME}
-description: Add a to-do to the user's Simple Todo list in Orca. Use when the user asks to add, note or remember a to-do or task for later, or when you finish and leave follow-up work undone that the user should not lose.
+description: Add a to-do to the user's Simple Todo Vault list in Orca. Use when the user asks to add, note or remember a to-do or task for later, or when you finish and leave follow-up work undone that the user should not lose.
 ---
 
-# Simple Todo
+# Simple Todo Vault
 
-Simple Todo is the user's to-do list in Orca's sidebar. You add to it by appending lines to a
+Simple Todo Vault is the user's to-do list in Orca's sidebar. You add to it by appending lines to a
 file. Orca takes them in within a few seconds, or when it next starts, and empties the file.
 
 ## Add a to-do
@@ -31,8 +31,8 @@ missing. Each line is a Markdown list item:
 From a shell:
 
 \`\`\`sh
-mkdir -p ~/.simple-todo
-cat >> ~/.simple-todo/inbox.md <<'TODO'
+mkdir -p ~/.simple-todo-vault
+cat >> ~/.simple-todo-vault/inbox.md <<'TODO'
 - [ ] Text of the to-do !high @project-name #tag
 TODO
 \`\`\`

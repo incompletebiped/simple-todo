@@ -218,7 +218,7 @@ function withList(todo: Todo, list: string): Todo {
 /** What agents are told: how to add a to-do by appending a line to the inbox file. */
 export function inboxInstructions(path: string): string {
   return [
-    `To add a to-do to my Simple Todo list in Orca, append one line per to-do to the file ${path}`,
+    `To add a to-do to my Simple Todo Vault list in Orca, append one line per to-do to the file ${path}`,
     '(create it if it does not exist). Each line is a Markdown list item:',
     '',
     '- [ ] Text of the to-do !high @project-name #tag due:2026-01-31',

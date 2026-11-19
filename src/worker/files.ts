@@ -48,5 +48,5 @@ export function inboxFileAt(path: string): InboxFile {
 }
 
 export function inboxFile(): InboxFile {
-  return inboxFileAt(join(homedir(), '.simple-todo', 'inbox.md'))
+  return inboxFileAt(join(homedir(), '.simple-todo-vault', 'inbox.md'))
 }
