@@ -26,7 +26,7 @@ Orca lists the access the plugin asks for (see [Access](#access)) and installs i
 - **Send to an agent**: hand a to-do to an agent already running in a terminal, in any workspace or on a paired server, or start a new agent with it. The card then shows what that agent is doing, and can mark the to-do done when the agent finishes.
 - **From an agent**: ask a coding agent to add a to-do and it lands in the list. The plugin installs the skill that tells agents how (see [Agents](#agents)).
 - **Housekeeping**: undo after deleting, clearing, archiving and importing; done to-dos are archived after a number of days; export a list as Markdown or everything as a JSON backup, and import either.
-- **Quick add and status bar**: Cmd+Alt+/ opens the form for a new to-do. The status bar shows how many are open, flagged when any is urgent or overdue.
+- **Quick add and status bar**: Cmd+Alt+Shift+/ (Ctrl+Alt+Shift+/ on Windows and Linux) opens the form for a new to-do. The status bar shows how many are open, flagged when any is urgent or overdue.
 
 - **Obsidian vault**: keep the lists as notes in a folder of your vault, edit them in Obsidian, and let Obsidian Sync carry them between machines.
 

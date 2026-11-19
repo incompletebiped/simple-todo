@@ -44,7 +44,7 @@
     "keybindings": [
       {
         "command": "simple-todo-vault.quickAdd",
-        "key": "Mod+Alt+Slash"
+        "key": "Mod+Alt+Shift+Slash"
       }
     ],
     "statusBarItems": [
