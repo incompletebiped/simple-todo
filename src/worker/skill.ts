@@ -45,7 +45,8 @@ async function occupied(path: string): Promise<boolean> {
 /** Whether `path` is the link this module makes. */
 async function isOurLink(path: string): Promise<boolean> {
   try {
-    return (await readlink(path)) === LINK_TARGET
+    // Windows reads a link back with backslashes.
+    return (await readlink(path)).replace(/\\/g, '/') === LINK_TARGET
   } catch {
     return false
   }
@@ -96,7 +97,7 @@ export async function syncSkill(home: string, text: string, enabled: boolean, wr
       return { written, notes: [`could not write the agent skill to ${file}: ${messageOf(error)}`] }
     }
   } else if (!ours && found !== text) {
-    notes.push(`left ${file} alone: it was not written by Simple Todo, or was changed since`)
+    notes.push(`left ${file} alone: it was not written by Simple Todo Vault, or was changed since`)
     return { written: null, notes }
   } else if (!ours) {
     // The same text, put there another way: nothing to do, and not ours to link or remove.

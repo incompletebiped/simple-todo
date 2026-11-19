@@ -6,9 +6,9 @@ import { assert, test } from 'orca/testing'
 import { inboxFileAt } from './files.ts'
 import { syncSkill } from './skill.ts'
 
-const newHome = (): Promise<string> => mkdtemp(join(tmpdir(), 'simple-todo-'))
-const skillFile = (home: string): string => join(home, '.agents', 'skills', 'simple-todo', 'SKILL.md')
-const claudeLink = (home: string): string => join(home, '.claude', 'skills', 'simple-todo')
+const newHome = (): Promise<string> => mkdtemp(join(tmpdir(), 'simple-todo-vault-'))
+const skillFile = (home: string): string => join(home, '.agents', 'skills', 'simple-todo-vault', 'SKILL.md')
+const claudeLink = (home: string): string => join(home, '.claude', 'skills', 'simple-todo-vault')
 
 async function there(path: string): Promise<boolean> {
   try {
@@ -25,7 +25,7 @@ test('installs the skill, links it for an agent with its own skills folder, and 
   const first = await syncSkill(home, 'one', true, null)
   assert.deepEqual(first, { written: 'one', notes: [] })
   assert.equal(await readFile(skillFile(home), 'utf8'), 'one')
-  assert.equal(await readlink(claudeLink(home)), '../../.agents/skills/simple-todo')
+  assert.equal((await readlink(claudeLink(home))).replace(/\\/g, '/'),'../../.agents/skills/simple-todo-vault')
   // Through the link, as the agent reads it.
   assert.equal(await readFile(join(claudeLink(home), 'SKILL.md'), 'utf8'), 'one')
   // A newer plugin brings a newer text.
@@ -46,7 +46,7 @@ test('turned off, removes the skill and its link', async () => {
   await mkdir(join(home, '.claude', 'skills'), { recursive: true })
   await syncSkill(home, 'one', true, null)
   assert.deepEqual(await syncSkill(home, 'one', false, 'one'), { written: null, notes: [] })
-  assert.equal(await there(join(home, '.agents', 'skills', 'simple-todo')), false)
+  assert.equal(await there(join(home, '.agents', 'skills', 'simple-todo-vault')), false)
   assert.equal(await there(claudeLink(home)), false)
   assert.equal(await there(join(home, '.claude', 'skills')), true)
   // Off and nothing there: nothing happens.
@@ -55,7 +55,7 @@ test('turned off, removes the skill and its link', async () => {
 
 test('a skill the person installed or changed is never written over or removed', async () => {
   const home = await newHome()
-  await mkdir(join(home, '.agents', 'skills', 'simple-todo'), { recursive: true })
+  await mkdir(join(home, '.agents', 'skills', 'simple-todo-vault'), { recursive: true })
   await mkdir(join(home, '.claude', 'skills'), { recursive: true })
   await writeFile(skillFile(home), 'mine', 'utf8')
   // Theirs from the start.
